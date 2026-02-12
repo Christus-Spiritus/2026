@@ -1,194 +1,215 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Parcours Christus – Guide</title>
-  <style>
-    :root{
-      --bg:#0b1220; --text:#e8eefc; --muted:#a7b4d6;
-      --accent:#7aa2ff; --ok:#4ade80; --warn:#fbbf24; --bad:#fb7185;
-      --line:rgba(255,255,255,.10);
-    }
-    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#070b14,var(--bg)); color:var(--text); }
-    .wrap{ max-width:1020px; margin:0 auto; padding:18px; }
-    .card{ background:rgba(17,26,46,.88); border:1px solid rgba(122,162,255,.15);
-      border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
-    .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
-    h1{ font-size:20px; margin:0 0 6px; }
-    h2{ font-size:16px; margin:18px 0 10px; }
-    h3{ font-size:13px; margin:14px 0 8px; color:var(--muted); letter-spacing:.2px; text-transform:uppercase; }
-    .sub{ color:var(--muted); font-size:13px; margin:0 0 12px; line-height:1.5; }
-    .btn{ background:rgba(122,162,255,.14); color:var(--text); border:1px solid rgba(122,162,255,.35);
-      padding:10px 12px; border-radius:12px; cursor:pointer; text-decoration:none; display:inline-flex;
-      align-items:center; gap:8px; font-weight:650; }
-    .btn.secondary{ background:rgba(255,255,255,.08); border:1px solid var(--line); }
-    .btn.ok{ background:rgba(74,222,128,.10); border:1px solid rgba(74,222,128,.35); }
-    .nav{ position:sticky; top:0; z-index:10; padding:10px 0;
-      background:linear-gradient(180deg, rgba(7,11,20,.96), rgba(7,11,20,.72) 70%, transparent); backdrop-filter: blur(10px); }
-    .nav .pill{ font-size:12px; color:var(--muted); border:1px solid var(--line); padding:6px 10px; border-radius:999px; }
-    .toc{ display:flex; gap:8px; flex-wrap:wrap; }
-    .toc a{ font-size:12px; color:var(--muted); border:1px solid var(--line); padding:6px 10px; border-radius:999px;
-      text-decoration:none; background:rgba(255,255,255,.06); }
-    .toc a:hover{ color:var(--text); }
-    .hr{ height:1px; background:var(--line); margin:14px 0; }
-    .quote{ padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05); line-height:1.55; }
-    .quote b{ font-weight:900; }
-    .mono{ white-space:pre-wrap; font-variant-ligatures:none; }
-    .two{ display:grid; gap:12px; }
-    @media (min-width: 920px){ .two{ grid-template-columns:1fr 1fr; } }
-    img.hero{ width:100%; height:auto; border-radius:14px; border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.10); }
-    .foot{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.5; }
-  </style>
-</head>
-<body>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guide – Parcours Christus</title>
 
-<div class="nav">
-  <div class="wrap">
-    <div class="row">
-      <div><div class="pill">📘 Guide du Parcours</div></div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
-        <a class="btn secondary" href="index.html">← Retour à l’appli</a>
-        <a class="btn ok" href="https://forms.cloud.microsoft/e/T0ftnUy0ri" target="_blank" rel="noopener">✅ S’inscrire</a>
-      </div>
-    </div>
-    <div class="toc" style="margin-top:10px">
-      <a href="#resume">Résumé</a>
-      <a href="#sens">Sens</a>
-      <a href="#mode">Mode d’emploi</a>
-      <a href="#psaume94">Psaume 94</a>
-      <a href="#journee">Journée type</a>
-      <a href="#fraternite">Fraternité</a>
-      <a href="#actions">Actions concrètes</a>
-      <a href="#pdf">PDF</a>
-    </div>
-  </div>
+<style>
+:root{
+  --bg:#0b1220;
+  --card:rgba(17,26,46,.92);
+  --text:#e8eefc;
+  --muted:#a7b4d6;
+  --accent:#7aa2ff;
+  --line:rgba(255,255,255,.10);
+}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#070b14,var(--bg));
+  color:var(--text);
+}
+.wrap{max-width:900px;margin:0 auto;padding:20px;}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+}
+h1{margin-top:0;font-size:24px;}
+h2{margin-top:30px;font-size:18px;color:var(--accent);}
+p{line-height:1.6;}
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(122,162,255,.15);
+  border:1px solid rgba(122,162,255,.35);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+}
+.btn:hover{opacity:.85;}
+blockquote{
+  border-left:4px solid var(--accent);
+  padding-left:14px;
+  color:var(--muted);
+  font-style:italic;
+}
+ul{line-height:1.6;}
+.nav{
+  margin-bottom:20px;
+}
+.nav a{
+  margin-right:12px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+.nav a:hover{color:var(--accent);}
+img{max-width:100%;border-radius:16px;}
+.center{text-align:center;}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<div class="card">
+
+<!-- ✅ 1) IMAGE AJOUTÉE AU TOUT DÉBUT -->
+<div class="center" style="margin-bottom:20px;">
+  <img src="resume-parcours.png" alt="Résumé du parcours Christus">
 </div>
 
-<div class="wrap">
-  <div class="card" id="resume">
-    <h1>Parcours Christus</h1>
-    <p class="sub">40 jours pour remettre le Christ au centre (du mercredi des Cendres au dimanche de Pâques).</p>
+<h1>Parcours Christus</h1>
+<p><strong>40 jours pour remettre le Christ au centre</strong></p>
 
-    <img class="hero" src="resume-parcours.png" alt="Résumé du parcours Christus" />
+<div class="nav">
+<a href="#sens">Le sens</a>
+<a href="#mode">Mode d’emploi</a>
+<a href="#psaume">Psaume 94</a>
+<a href="#fraternite">Temps en fraternité</a>
+<a href="#inscription">S’inscrire</a>
+</div>
 
-    <div class="hr"></div>
+<a class="btn" href="https://forms.cloud.microsoft/e/T0ftnUy0ri" target="_blank">
+✍️ S’inscrire au parcours
+</a>
 
-    <div class="row">
-      <a class="btn ok" href="https://forms.cloud.microsoft/e/T0ftnUy0ri" target="_blank" rel="noopener">✅ S’inscrire</a>
-      <a class="btn" href="index.html">✝️ Ouvrir l’appli (objectifs)</a>
-      <a class="btn secondary" href="#mode">📌 Voir le mode d’emploi</a>
-    </div>
-  </div>
+</div>
 
-  <div class="card" id="sens" style="margin-top:12px">
-    <h2>Le sens du parcours</h2>
-    <div class="quote">PARCOURS CHRISTUS,<br/>40 JOURS POUR REMETTRE LE CHRIST AU CENTRE<br/>Le Christ est parti 40 jours au désert.<br/>C’est le sens du mot Carême (Quadragesima).<br/>Chaque jour, l’Eglise commence l’office avec un psaume invitatoire. Pendant le<br/>Carême, l’antienne de l’invitatoire (la phrase qui précède ce psaume) est :<br/>« Les yeux fixés sur Jésus-Christ, entrons dans le combat de Dieu. »<br/>Voilà un beau programme de Carême ! Mener le combat de la vie chrétienne en<br/>regardant Jésus, à la fois comme exemple à suivre et comme source de notre<br/>espérance, est le chemin de conversion que propose ce parcours de Carême.<br/>Le but de ce parcours de Carême est donc de partir au désert avec le Christ pour<br/>prendre des moyens concrets de remettre le Christ au cœur de notre vie<br/>chrétienne.<br/>Le projet est simple : pour remettre le Christ au centre, lire chaque jour<br/>l’Evangile du jour - accompagné d’une courte méditation - pour avoir les yeux<br/>fixés sur Jésus. Et vivre chacune des actions mises en place durant ce Carême<br/>comme un moyen d’aimer et d’imiter Jésus, d’aimer comme Il aime, de quitter<br/>notre confort comme Lui qui est parti jeûner au désert, de se libérer de ce qui<br/>nous éloigne de Lui ou nous empêche de vivre pleinement notre vie chrétienne.<br/>Très concrètement, des engagements sont à prendre dans 3 domaines :<br/>Discipline spirituelle : prière, eucharistie, adoration, confession, chapelet,<br/>lecture spirituelle…<br/>Ascèse : jeûne, exercice physique, sommeil, abstinence numérique…<br/>Charité et fraternité : aumône, service, binôme et équipe pour se soutenir<br/>dans l’effort</div>
-  </div>
+<div class="card" id="sens">
+<h2>Le sens du parcours</h2>
+<p>
+Un chemin simple et concret pour vivre le Carême dans la fidélité quotidienne :
+discipline spirituelle, ascèse et charité.
+</p>
+</div>
 
-  <div class="card" id="mode" style="margin-top:12px">
-    <h2>Mode d’emploi</h2>
-    <div class="quote">Pour s’adapter à chacun, 3 formules sont proposées, avec un niveau de difficulté<br/>croissant :<br/>🌾<br/>« Grain de sénevé »<br/>🍇<br/>« Le cep et les sarments »<br/>❤🔥<br/>« Le feu dévorant »<br/>Que chacun prenne la formule qui lui semble la plus adaptée pour que ce<br/>Carême soit un temps de conversion, mais que ce soit aussi réaliste.<br/>Par ailleurs, le discernement est nécessaire : jeûner de nourriture ou faire de<br/>l’exercice physique, par exemple, n’est pas adapté à chacun en fonction de<br/>sa santé. Le but du Carême ne peut pas être de mettre en danger la vie que<br/>Dieu nous a donnée. Et la prudence est une vertu.<br/>De même, le devoir d’état a toujours la priorité : si on ne s’occupe plus de<br/>ses enfants ou qu’on ne fait plus correctement son travail pour faire 1h<br/>d’oraison quotidienne, c’est qu’il y a quelque chose qui n’est pas ajusté.<br/>(Évidemment, si on ne s’occupe pas de ses enfants mais qu’on perd 1h sur<br/>les réseaux sociaux, le problème est différent !)<br/>Le Parcours Christus, 40 jours pour remettre le Christ au centre, va du<br/>mercredi des Cendres au dimanche de Pâques. Il est proposé de le prolonger<br/>par le Parcours Spiritus, 50 jours pour vivre de l’Esprit Saint du dimanche<br/>de Pâques au dimanche de la Pentecôte.<br/>Mode d’emploi<br/>Chaque matin, il est proposé de commencer la journée avec le psaume 94<br/>(psaume invitatoire) qui nous invite à écouter la parole de Dieu (« Aujourd’hui<br/>écouterez-vous ma parole »)<br/>Les yeux fixés sur Jésus-Christ, entrons dans le combat de Dieu.</div>
+<div class="card" id="mode">
+<h2>Mode d’emploi</h2>
+<ul>
+<li>Chaque jour, commence par le psaume 94.</li>
+<li>Chaque jour, lis l’Évangile et la courte méditation proposée.</li>
+<li>Vis tes engagements personnels.</li>
+<li>Un temps hebdomadaire en fraternité.</li>
+</ul>
+</div>
 
-    <div class="hr"></div>
+<!-- ✅ 2) PSAUME 94 COMPLET AVEC ANTIENNE -->
+<div class="card" id="psaume">
+<h2>Psaume 94</h2>
 
-    <h3>Point clé</h3>
-    <div class="quote">
-      Chaque matin : <b>Psaume 94</b> (invitatoire) avec l’antienne.<br/>
-      Chaque jour : lis <b>l’Évangile et la courte méditation proposée</b> pour centrer ton regard sur le Christ.<br/>
-      Chaque jour / semaine : accomplis les objectifs concrets selon la formule choisie.
-    </div>
-  </div>
+<p><strong>Antienne :</strong><br>
+Aujourd’hui, ne fermez pas votre cœur, mais écoutez la voix du Seigneur.
+</p>
 
-  <div class="card" id="psaume94" style="margin-top:12px">
-    <h2>Psaume 94 (invitatoire)</h2>
-    <p class="sub">Antienne au début et à la fin.</p>
-    <div class="quote mono">Antienne : Les yeux fixés sur Jésus-Christ, entrons dans le combat de Dieu.
-
-1 Venez, crions de joie pour le Seigneur,
-acclamons notre Rocher, notre salut !
-2 Allons jusqu&#x27;à lui en rendant grâce,
+<p>
+Venez, crions de joie pour le Seigneur,<br>
+acclamons notre Rocher, notre salut !<br>
+Allons jusqu’à lui en rendant grâce,<br>
 par nos hymnes de fête acclamons-le !
-3 Oui, le grand Dieu, c&#x27;est le Seigneur,
-le grand roi au-dessus de tous les dieux :
-4 il tient en main les profondeurs de la terre,
-et les sommets des montagnes sont à lui ;
-5 à lui la mer, c&#x27;est lui qui l&#x27;a faite,
+</p>
+
+<p>
+Oui, le grand Dieu, c’est le Seigneur,<br>
+le grand roi au-dessus de tous les dieux :<br>
+il tient en main les profondeurs de la terre,<br>
+et les sommets des montagnes sont à lui ;<br>
+à lui la mer, c’est lui qui l’a faite,<br>
 et les terres, car ses mains les ont pétries.
-6 Entrez, inclinez-vous, prosternez-vous,
-adorons le Seigneur qui nous a faits.
-7 Oui, il est notre Dieu ; +
-nous sommes le peuple qu&#x27;il conduit,
+</p>
+
+<p>
+Entrez, inclinez-vous, prosternez-vous,<br>
+adorons le Seigneur qui nous a faits.<br>
+Oui, il est notre Dieu ;<br>
+nous sommes le peuple qu’il conduit,<br>
 le troupeau guidé par sa main.
-Aujourd&#x27;hui écouterez-vous sa parole ? +
-8 « Ne fermez pas votre cœur comme au désert,
-comme au jour de tentation et de défi,
-9 où vos pères m&#x27;ont tenté et provoqué,
+</p>
+
+<p>
+Aujourd’hui écouterez-vous sa parole ?<br>
+« Ne fermez pas votre cœur comme au désert,<br>
+comme au jour de tentation et de défi,<br>
+où vos pères m’ont tenté et provoqué,<br>
 et pourtant ils avaient vu mon exploit.
-10 « Quarante ans leur génération m&#x27;a déçu, +
-et j&#x27;ai dit : Ce peuple a le cœur égaré,
-il n&#x27;a pas connu mes chemins.
-11 Dans ma colère, j&#x27;en ai fait le serment :
-Jamais ils n&#x27;entreront dans mon repos. »
-Rendons gloire au Père tout-puissant,
-A son fils Jésus-Christ le Seigneur,
-A l’Esprit qui habite en nos cœurs,
-Pour les siècles des siècles. Amen.
+</p>
 
-Antienne : Les yeux fixés sur Jésus-Christ, entrons dans le combat de Dieu.</div>
-  </div>
+<p>
+Quarante ans leur génération m’a déçu,<br>
+et j’ai dit : Ce peuple a le cœur égaré,<br>
+il n’a pas connu mes chemins.<br>
+Dans ma colère, j’en ai fait le serment :<br>
+Jamais ils n’entreront dans mon repos. »
+</p>
 
-  <div class="card" id="journee" style="margin-top:12px">
-    <h2>Une journée type</h2>
-    <div class="quote">Ensuite, dans chaque journée, on est invité à lire l’évangile du jour et le court<br/>commentaire qui en est proposé, pour centrer notre regard sur le Christ.<br/>Enfin, en fonction de la formule retenue, chaque action concrète doit être<br/>effectuée (certaines sont quotidiennes, d’autres hebdomadaires, d’autres<br/>seulement certains jours ou quelques fois durant le parcours – comme pour la<br/>confession).<br/>Le dimanche étant le jour de la Résurrection, même pendant le Carême, les<br/>ascèses sont levées ce jour-là. Mais pas la discipline spirituelle et ce qui<br/>concerne la charité ou la fraternité.</div>
+<p><strong>Antienne :</strong><br>
+Aujourd’hui, ne fermez pas votre cœur, mais écoutez la voix du Seigneur.
+</p>
+</div>
 
-    <div class="hr"></div>
-    <h3>Dimanches & solennités</h3>
-    <div class="quote">
-      Le dimanche étant le jour de la Résurrection, même pendant le Carême, les ascèses sont levées ce jour-là.<br/>
-      Pour ce Carême 2026, <b>deux solennités</b> (19 mars et 25 mars) sont vécues avec la même conséquence :<br/>
-      <b>jeûne, douche, écrans, alcool/sucreries</b> sont levés — mais <b>pas le sommeil</b>, ni la discipline spirituelle, ni la charité/fraternité.
-    </div>
-  </div>
+<!-- ✅ 3) PRIÈRE SAINT MICHEL ARCHANGE COMPLÈTE -->
+<div class="card" id="fraternite">
+<h2>Temps en fraternité</h2>
 
-  <div class="card" id="fraternite" style="margin-top:12px">
-    <h2>Temps en fraternité (mercredi soir)</h2>
-    <div class="quote">Chaque mercredi, l’adoration est proposée dans l’église de Saint Arnoult de<br/>20h30 à 20h50. A partir de 20h50, il y a 40 minutes pour vivre en fraternité<br/>(petite équipe de 4 à 8 personnes, composée de 2 à 4 binômes) un temps de<br/>partage pour se soutenir dans les efforts, en toute confiance et confidentialité.<br/>Le but est de garder sa fraternité tout au long du parcours.<br/>On est invité à terminer ce temps de fraternité en se confiant à l’Archange Saint<br/>Michel avec la prière dite de Léon XIII, et remise à l’honneur par le Pape<br/>François.</div>
+<p>
+Lecture de l’Évangile, partage simple et prière.
+</p>
 
-    <div class="hr"></div>
+<h3>Prière à saint Michel Archange</h3>
 
-    <h3>Prière à saint Michel Archange (Léon XIII)</h3>
-    <div class="quote mono">« Saint Michel Archange, défendez-nous dans le combat ;
-soyez notre secours contre la malice et les embûches du démon.
-Que Dieu lui fasse sentir son empire, nous vous en supplions.
-Et vous, prince de la milice céleste, repoussez en enfer, par la force divine,
-Satan et les autres esprits mauvais qui rôdent dans le monde en vue de perdre
-les âmes. Amen. »</div>
-  </div>
+<p>
+Saint Michel Archange, défendez-nous dans le combat.<br>
+Soyez notre secours contre la malice et les embûches du démon.<br>
+Que Dieu lui fasse sentir son empire, nous vous en supplions.<br>
+Et vous, Prince de la milice céleste,<br>
+repoussez en enfer, par la force divine,<br>
+Satan et les autres esprits mauvais<br>
+qui rôdent dans le monde pour la perte des âmes.<br>
+Amen.
+</p>
 
-  <div class="card" id="actions" style="margin-top:12px">
-    <h2>Petit aperçu des actions concrètes</h2>
-    <div class="two">
-      <div class="quote">Chapelet : le chapelet est la prière du pauvre, qui peut être récitée dans<br/>bien des lieux (église, maison, transports…) et qui permet de méditer les<br/>mystères de la vie du Christ à chaque dizaine.<br/>Lecture spirituelle : on peut choisir par exemple de lire un livre de la Bible<br/>en continu durant le Carême, ou choisir un auteur spirituel. On peut<br/>conseiller par exemple L’imitation de Jésus-Christ qui a nourri des<br/>générations de saints, ou L’introduction à la vie dévote de Saint François de<br/>Sales. Mais la liste n’est pas exhaustive !<br/>Examen de conscience : on peut regarder sa journée avec le Seigneur, en<br/>prenant le temps de dire pardon, merci et s’il te plaît. On peut aussi utiliser<br/>le programme choisi dans le Parcours pour voir ce qui a été et ce qui peut<br/>être amélioré, en confiant cela au Seigneur dans la prière.<br/>Confession : se confesser, c’est se reconnaître pécheur mais c’est surtout<br/>se laisser aimer et libérer par notre Dieu miséricordieux. L’Église nous<br/>demande de nous confesser au moins une fois par an, si possible avant<br/>Pâques.<br/>Adoration : Jésus est présent dans l’Eucharistie. L’adoration est une belle<br/>occasion de retrouver Jésus dans la présence eucharistique.<br/>Messe : si l’Église nous demande d’aller à la messe du dimanche, la messe<br/>est proposée aussi régulièrement en semaine. Comme elle est la source et<br/>le sommet de la vie chrétienne, venir puiser à cette source même en<br/>semaine est une grâce.<br/>Ascèse<br/>Jeûne : se priver de nourriture, ce n’est pas pour faire un régime et perdre<br/>du poids. C’est imiter Jésus au désert, c’est partager volontairement la faim<br/>de ceux qui manquent de nourriture sans l’avoir choisi, c’est remettre la<br/>nourriture à sa juste place, c’est-à-dire un moyen nécessaire pour vivre et<br/>non une fin en soi… Nous ne sommes pas des musulmans. Le jeûne n’est<br/>pas du lever au coucher du soleil. De même, il faut se méfier d’un rapport<br/>trop légaliste au jeûne (par exemple en attendant minuit pour se goinfrer<br/>après une journée d’effort !) Selon la norme catholique rappelée par Paul<br/>VI, le jeûne c’est un seul repas complet, avec deux collations légères.<br/>Abstinence : c’est, dans l’esprit du jeûne, une privation de viande.<br/>Traditionnellement, les œufs et le poisson sont acceptés.<br/>Renoncer à l’alcool &amp; aux sucreries : autre manière de vivre le jeûne.</div>
-      <div class="quote">Sobriété numérique : les écrans nous prennent notre temps, notre<br/>attention, occupent notre esprit… Se libérer des écrans, c’est partir au<br/>désert numériquement pour être plus disponible pour Dieu et pour nos<br/>frères.<br/>Douche tempérée/froide quotidienne : c’est partir au désert en quittant<br/>son confort. Cela peut éviter de passer trop de temps sous la douche. Et ça<br/>libère du temps pour la prière par exemple. Prendre une douche froide à la<br/>même fréquence que lorsqu’on prend une douche chaude. En effet, le<br/>Carême, ce n’est pas un temps pour être sale !<br/>Exercice physique : « mens sana in corpore sano » (« un esprit sain dans<br/>un corps sain ») Dieu ne nous a pas créé ange – c’est-à-dire pur esprit –<br/>mais humain. Nous avons un esprit et un corps. L’exercice physique, c’est<br/>l’occasion de prendre soin du corps que Dieu nous donne. Et l’exercice<br/>physique peut aussi être une belle occasion de libérer son esprit.<br/>Sommeil : « Dieu comble son bien-aimé quand il dort » (Psaume 126, 2).<br/>Or, dans le monde d’aujourd’hui, nous manquons souvent de sommeil. Le<br/>Carême est une bonne occasion de reprendre des bonnes habitudes de<br/>sommeil.<br/>Charité &amp; fraternité<br/>« Le jeûne ne porte pas de fruit s’il n’est pas arrosé par la miséricorde ; le jeûne<br/>se dessèche par la sécheresse de la miséricorde ; ce que la pluie est pour la<br/>terre, la miséricorde l’est pour le jeûne. Celui qui jeûne peut bien cultiver son<br/>cœur, purifier sa chair, arracher les vices, semer les vertus : s’il n’y verse pas les<br/>flots de la miséricorde, il ne recueille pas de fruit. » Saint Pierre Chrysologue<br/>Aumône/service : « En effet, celui qui n’aime pas son frère, qu’il voit, est<br/>incapable d’aimer Dieu, qu’il ne voit pas. » (1 Jn 4, 20)<br/>L’amour de Dieu et du prochain sont intimement liés. Ainsi, il ne suffit pas de<br/>faire des efforts et de prier pour vivre en disciple du Christ, mais cela doit aussi<br/>se manifester dans l’amour du prochain. Et le but de ce parcours est de vivre<br/>cela concrètement.</div>
-    </div>
-    <div class="hr"></div>
-    <div class="quote">Fraternité<br/>« Un frère appuyé sur un autre frère est une citadelle imprenable » dit le livre<br/>des Proverbes (18,19 - Vulgate)<br/>Le Seigneur nous a donné des frères et l’Église pour nous aider les uns les<br/>autres. Là aussi, le binôme et la fraternité visent à rendre concret ce principe<br/>dans notre parcours. Notamment, en étant quotidiennement en contact avec<br/>son binôme, on crée un lien de confiance et de prière qui peut être un vrai<br/>encouragement sur la durée du parcours.<br/>Les binômes peuvent se former librement et se déclarer lors de l’inscription.<br/>Si nécessaire, nous pourrons former des binômes (non mixtes) pour ceux<br/>qui le désirent. A part les couples qui le désireraient, il semble bien d’éviter<br/>les binômes mixtes. A l’inverse, les fraternités (regroupant 2 à 4 binômes)<br/>peuvent être mixtes ou non, au choix des participants.<br/>EN RÉSUMÉ<br/>Christus,<br/>40 jours pour remettre le Christ au centre<br/>Quand ?<br/>du mercredi des Cendres au dimanche de Pâques<br/>Quoi ?<br/>Des objectifs concrets de discipline spirituelle, d’ascèse, de<br/>charité et de fraternité<br/>Comment ?<br/>A vivre personnellement, en binôme et en petite fraternité</div>
-  </div>
+</div>
 
-  <div class="card" id="pdf" style="margin-top:12px">
-    <h2>Version PDF</h2>
-    <p class="sub">Si tu mets le PDF dans le même dossier que l’appli, tu peux l’ouvrir ici.</p>
-    <div class="row">
-      <a class="btn secondary" href="presentation-parcours-christus.pdf" target="_blank" rel="noopener">📄 Ouvrir le PDF</a>
-      <a class="btn ok" href="https://forms.cloud.microsoft/e/T0ftnUy0ri" target="_blank" rel="noopener">✅ S’inscrire</a>
-      <a class="btn" href="index.html">✝️ Retour à l’appli</a>
-    </div>
-    <div class="foot">Fichier attendu : <b>presentation-parcours-christus.pdf</b></div>
-  </div>
+<div class="card" id="inscription">
+<h2>Inscription</h2>
+
+<p>
+Le parcours se vit personnellement, en binôme et en petite fraternité.
+</p>
+
+<a class="btn" href="https://forms.cloud.microsoft/e/T0ftnUy0ri" target="_blank">
+✍️ Je m’inscris au Parcours Christus
+</a>
+
+<br><br>
+
+<a class="btn" href="presentation-parcours-christus.pdf" target="_blank">
+📄 Télécharger le guide en PDF
+</a>
+
+<br><br>
+
+<a class="btn" href="index.html">
+⬅ Retour à l’appli
+</a>
+
+</div>
+
 </div>
 </body>
 </html>
