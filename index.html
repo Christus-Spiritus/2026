@@ -183,6 +183,9 @@
   const START = new Date("2026-02-18T00:00:00"); // Mercredi des Cendres
   const END   = new Date("2026-04-05T00:00:00"); // Dimanche de Pâques
 
+  // Jours de "repos d’ascèse" : dimanches + solennités
+  const SOLEMNITIES = new Set(["2026-03-19","2026-03-25"]); // Saint Joseph / Annonciation
+
   const KEY = "careme_2026_custom_levels_v3";
   const $ = (id) => document.getElementById(id);
 
@@ -209,20 +212,21 @@
   const LEVELS = {
     1: {
       daily: [
-        { id:"oraison", label:"Oraison : 15 minutes", cat:"Discipline spirituelle" },
-        { id:"chapelet", label:"Chapelet : au moins une dizaine", cat:"Discipline spirituelle" },
+        { id:"oraison", label:"Oraison : 15 minutes par jour", cat:"Discipline spirituelle" },
+        { id:"chapelet", label:"Chapelet : au moins une dizaine quotidienne", cat:"Discipline spirituelle" },
         { id:"lecture", label:"Lecture spirituelle : Évangile ou liturgie du jour", cat:"Discipline spirituelle" },
-        { id:"renoncer", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse" },
-        { id:"sobriete", label:"Sobriété numérique : pas après 21h", cat:"Ascèse" },
-        { id:"sommeil", label:"Sommeil : viser au moins 7h", cat:"Ascèse" },
+
+        { id:"alcool_sucre", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sobriete", label:"Sobriété numérique : pas après 21h", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sommeil", label:"Sommeil : viser au moins 7h/nuit", cat:"Ascèse" },
       ],
       weekdayOnly: [
-        { id:"abstinence_vendredi", label:"Abstinence : le vendredi (viande)", cat:"Ascèse", days:[5] },
+        { id:"abstinence_vendredi", label:"Abstinence (pas de viande) : vendredi", cat:"Ascèse", days:[5] },
       ],
       weekly: [
-        { id:"sport_1", label:"Exercice physique : 1 séance/semaine", cat:"Ascèse" },
-        { id:"aumone", label:"Aumône : 1 geste concret/semaine (don, service, temps offert)", cat:"Charité & fraternité" },
-        { id:"fraternite", label:"Fraternité : partager 1 fois/semaine (binôme, ami, groupe)", cat:"Charité & fraternité" },
+        { id:"sport_1", label:"Exercice physique : 1 séance par semaine", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"aumone", label:"Aumône : 1 geste concret par semaine", cat:"Charité & fraternité" },
+        { id:"fraternite", label:"Fraternité : partager une fois par semaine", cat:"Charité & fraternité" },
       ],
       season: [
         { id:"confession", label:"Confession : au moins 1 fois avant Pâques", cat:"Discipline spirituelle" },
@@ -232,25 +236,27 @@
 
     2: {
       daily: [
-        { id:"oraison", label:"Oraison : 30 minutes", cat:"Discipline spirituelle" },
-        { id:"lecture_20", label:"Lecture/formation : 20 minutes", cat:"Discipline spirituelle" },
+        { id:"oraison", label:"Oraison : 30 minutes par jour", cat:"Discipline spirituelle" },
+        { id:"lecture_20", label:"Lecture/formation : 20 minutes par jour", cat:"Discipline spirituelle" },
         { id:"examen", label:"Examen de conscience : chaque soir", cat:"Discipline spirituelle" },
-        { id:"renoncer", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse" },
-        { id:"sobriete_strict", label:"Sobriété numérique : pas de réseaux sociaux/vidéos (sauf nécessaire)", cat:"Ascèse" },
-        { id:"douche_temperee", label:"Douches tempérées ou froides (selon possibilité)", cat:"Ascèse" },
-        { id:"sommeil", label:"Sommeil : 7h/nuit", cat:"Ascèse" },
-        { id:"binome_quot", label:"Fraternité : point quotidien avec son binôme (prière & soutien)", cat:"Charité & fraternité" },
+
+        { id:"alcool_sucre", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sobriete_strict", label:"Sobriété numérique : pas de réseaux sociaux/vidéos (sauf nécessaire)", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"douche_temperee", label:"Douches tempérées ou froides (selon possibilité)", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sommeil", label:"Sommeil : viser au moins 7h/nuit", cat:"Ascèse" },
+
+        { id:"binome_quot", label:"Fraternité : point quotidien avec son binôme (prière + soutien)", cat:"Charité & fraternité" },
       ],
       weekdayOnly: [
-        { id:"jeune_mercredi", label:"Jeûne : mercredi", cat:"Ascèse", days:[3] },
-        { id:"jeune_vendredi", label:"Jeûne : vendredi", cat:"Ascèse", days:[5] },
-        { id:"abstinence_mercredi", label:"Abstinence : mercredi (viande)", cat:"Ascèse", days:[3] },
-        { id:"abstinence_vendredi", label:"Abstinence : vendredi (viande)", cat:"Ascèse", days:[5] },
+        { id:"jeune_mercredi", label:"Jeûne : mercredi", cat:"Ascèse", days:[3], suspendOnRestDays:true },
+        { id:"jeune_vendredi", label:"Jeûne : vendredi", cat:"Ascèse", days:[5], suspendOnRestDays:true },
+        { id:"abstinence_mercredi", label:"Abstinence (pas de viande) : mercredi", cat:"Ascèse", days:[3] },
+        { id:"abstinence_vendredi", label:"Abstinence (pas de viande) : vendredi", cat:"Ascèse", days:[5] },
       ],
       weekly: [
         { id:"chapelet_complet", label:"Chapelet : 1 chapelet complet/semaine (ou quotidien si possible)", cat:"Discipline spirituelle" },
-        { id:"sport_2", label:"Exercice physique : 2 séances/semaine", cat:"Ascèse" },
-        { id:"aumone_3", label:"Aumône : au moins 3 gestes concrets/semaine", cat:"Charité & fraternité" },
+        { id:"sport_2", label:"Exercice physique : 2 séances par semaine", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"aumone_3", label:"Aumône : au moins 3 gestes concrets par semaine", cat:"Charité & fraternité" },
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
       ],
       season: [
@@ -261,31 +267,33 @@
 
     3: {
       daily: [
-        { id:"oraison_1h", label:"Oraison : 1h/jour", cat:"Discipline spirituelle" },
+        { id:"oraison_1h", label:"Oraison : 1h par jour", cat:"Discipline spirituelle" },
         { id:"chapelet_quot", label:"Chapelet : quotidien, intégral si possible", cat:"Discipline spirituelle" },
-        { id:"lecture_30", label:"Lecture spirituelle : 30 min/jour (Écriture + auteur)", cat:"Discipline spirituelle" },
-        { id:"examen_prof", label:"Examen de conscience : approfondi chaque soir (écrit si possible)", cat:"Discipline spirituelle" },
-        { id:"renoncer", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse" },
-        { id:"sobriete_rad", label:"Sobriété numérique radicale : pas d’écran non nécessaire", cat:"Ascèse" },
-        { id:"douche_froide", label:"Douche froide quotidienne", cat:"Ascèse" },
-        { id:"sommeil_reg", label:"Sommeil : régulier, jamais < 7h", cat:"Ascèse" },
-        { id:"aumone_jour", label:"Aumône/service : rendre chaque jour un service à quelqu’un", cat:"Charité & fraternité" },
-        { id:"checkin_quot", label:"Fraternité : point quotidien avec son binôme (prière & soutien)", cat:"Charité & fraternité" },
+        { id:"lecture_30", label:"Lecture spirituelle : 30 min/jour (Écriture + auteur spirituel)", cat:"Discipline spirituelle" },
+        { id:"examen_prof", label:"Examen approfondi : chaque soir (écrit si possible)", cat:"Discipline spirituelle" },
+
+        { id:"alcool_sucre", label:"Renoncer à l’alcool / aux sucreries", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sobriete_rad", label:"Sobriété numérique radicale : pas d’écran non nécessaire", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"douche_froide", label:"Douche froide quotidienne", cat:"Ascèse", suspendOnRestDays:true },
+        { id:"sommeil_reg", label:"Sommeil : régulier, jamais moins de 7h/nuit", cat:"Ascèse" },
+
+        { id:"aumone_quot", label:"Aumône/service : rendre chaque jour un service à quelqu’un", cat:"Charité & fraternité" },
+        { id:"binome_quot", label:"Fraternité : point quotidien avec son binôme (prière + soutien)", cat:"Charité & fraternité" },
       ],
       weekdayOnly: [
-        { id:"jeune_tous", label:"Jeûne : tous les jours du Carême (sauf dimanches/solennités)", cat:"Ascèse", days:[1,2,3,4,5,6] },
-        { id:"abstinence_mercredi", label:"Abstinence stricte : mercredi (viande)", cat:"Ascèse", days:[3] },
-        { id:"abstinence_vendredi", label:"Abstinence stricte : vendredi (viande)", cat:"Ascèse", days:[5] },
+        { id:"jeune_tous", label:"Jeûne : tous les jours du Carême (sauf dimanches et solennités)", cat:"Ascèse", days:[1,2,3,4,5,6], suspendOnRestDays:true },
+        { id:"abstinence_mercredi", label:"Abstinence stricte (viande) : mercredi", cat:"Ascèse", days:[3] },
+        { id:"abstinence_vendredi", label:"Abstinence stricte (viande) : vendredi", cat:"Ascèse", days:[5] },
       ],
       weekly: [
-        { id:"adoration", label:"Adoration : au moins 1 fois/semaine", cat:"Discipline spirituelle" },
-        { id:"messe", label:"Messe : en semaine au moins 1 fois (en plus du dimanche) – quotidienne si possible", cat:"Discipline spirituelle" },
-        { id:"sport_3", label:"Exercice physique : 3 séances/semaine", cat:"Ascèse" },
+        { id:"adoration", label:"Adoration : au moins une fois par semaine", cat:"Discipline spirituelle" },
+        { id:"messe", label:"Messe : en semaine si possible (au moins 1 en plus du dimanche)", cat:"Discipline spirituelle" },
+        { id:"sport_3", label:"Exercice physique : 3 fois par semaine", cat:"Ascèse", suspendOnRestDays:true },
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
-        { id:"accompagnement", label:"Accompagnement spirituel : régulier (prêtre, religieux, religieuse)", cat:"Charité & fraternité" },
       ],
       season: [
         { id:"confession_2", label:"Confession : 2 fois durant le Carême (≥ 1 avant la Semaine Sainte)", cat:"Discipline spirituelle" },
+        { id:"accompagnement", label:"Accompagnement spirituel : régulier", cat:"Charité & fraternité" },
       ],
       periodic: []
     }
@@ -304,6 +312,11 @@
     const mm = String(x.getMonth()+1).padStart(2,'0');
     const dd = String(x.getDate()).padStart(2,'0');
     return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function isRestDay(d){
+    const iso = toISODate(d);
+    return dayOfWeek(d) === 0 || SOLEMNITIES.has(iso);
   }
   function addDays(d, n){
     const x = new Date(d); x.setDate(x.getDate()+n); x.setHours(0,0,0,0); return x;
@@ -406,17 +419,27 @@
 
   function tasksTodayFor(level, date){
     const out = [];
-    LEVELS[level].daily.forEach(t => out.push({ ...t, scope:"daily" }));
+    const rest = isRestDay(date);
+
+    LEVELS[level].daily.forEach(t => {
+      if(rest && t.suspendOnRestDays) return;
+      out.push({ ...t, scope:"daily" });
+    });
+
     const dow = dayOfWeek(date);
     LEVELS[level].weekdayOnly.forEach(t => {
       if(t.days && t.days.includes(dow)){
+        if(rest && t.suspendOnRestDays) return;
+
         let extra = null;
         if(dow === 5) extra = "Vendredi";
         else if(dow === 3) extra = "Mercredi";
         else extra = "Jour";
+
         out.push({ ...t, scope:"weekdayOnly", extra });
       }
     });
+
     return out;
   }
 
@@ -469,10 +492,15 @@
 
     const dow = dayOfWeek(current);
     let hint = "✅ Un pas à la fois. Si tu rates un jour, reprends simplement demain.";
-    if(dow === 5) hint = "✨ Aujourd’hui c’est <b>vendredi</b> : objectifs spécifiques affichés.";
-    if(dow === 3 && level === "2") hint = "✨ Aujourd’hui c’est <b>mercredi</b> : jeûne affiché (niveau “cep et sarments”).";
-    if(level === "3" && dow !== 0) hint = "🔥 Niveau “feu dévorant” : jeûne affiché tous les jours sauf dimanche.";
-    if(level === "3" && dow === 0) hint = "🌿 Dimanche : pas de jeûne — garde la joie et l’action de grâce.";
+    if(isRestDay(current)){
+      const iso = toISODate(current);
+      const name = (dow === 0) ? "Dimanche" : (iso === "2026-03-19" ? "Solennité de saint Joseph" : (iso === "2026-03-25" ? "Solennité de l’Annonciation" : "Solennité"));
+      hint = `🌿 ${name} : les ascèses (jeûne, douche, écrans, alcool/sucreries) sont levées aujourd’hui — on garde le sommeil.`;
+    }
+    if(!isRestDay(current) && dow === 5) hint = "✨ Aujourd’hui c’est <b>vendredi</b> : objectifs spécifiques affichés.";
+    if(!isRestDay(current) && dow === 3 && level === "2") hint = "✨ Aujourd’hui c’est <b>mercredi</b> : jeûne affiché (niveau “cep et sarments”).";
+    if(!isRestDay(current) && level === "3" && dow !== 0) hint = "🔥 Niveau “feu dévorant” : jeûne affiché tous les jours (sauf dimanches et solennités).";
+    if(!isRestDay(current) && level === "3" && dow === 0) hint = "🌿 Dimanche : pas de jeûne — garde la joie et l’action de grâce.";
     $("dayHint").innerHTML = hint;
   }
 
@@ -753,18 +781,20 @@
     renderAll();
   });
 
-  // --- Reset total (simple et fiable)
-$("resetAll").addEventListener("click", () => {
-  const ok = confirm("Êtes-vous sûr de vouloir tout réinitialiser ?\n\nCette action effacera toutes les coches enregistrées sur cet appareil.");
-  if(!ok) return;
+  // --- Reset total (simple)
+  $("resetAll").addEventListener("click", () => {
+    const ok = confirm("Êtes-vous sûr de vouloir tout réinitialiser ?
 
-  localStorage.removeItem(KEY);
-  state = { level: 1, days:{}, weeks:{}, season:{}, periodic:{} };
-  save(state);
+Cette action effacera toutes les coches enregistrées sur cet appareil.");
+    if(!ok) return;
 
-  $("levelSelect").value = "1";
-  renderAll();
-});
+    localStorage.removeItem(KEY);
+    state = { level: 1, days:{}, weeks:{}, season:{}, periodic:{} };
+    save(state);
+
+    $("levelSelect").value = "1";
+    renderAll();
+  });
 
   // init
   $("levelSelect").value = String(state.level || 1);
