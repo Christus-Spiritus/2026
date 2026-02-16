@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Méditation du jour – Carême 2026</title>
+  <style>
+    :root{
+      --bg:#0b1220; --text:#e8eefc; --muted:#a7b4d6;
+      --accent:#7aa2ff; --ok:#4ade80; --warn:#fbbf24; --bad:#fb7185;
+      --line:rgba(255,255,255,.10);
+    }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#070b14,var(--bg)); color:var(--text); }
+    .wrap{ max-width:920px; margin:0 auto; padding:18px; }
+    .card{ background:rgba(17,26,46,.88); border:1px solid rgba(122,162,255,.15);
+      border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+    .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    h1{ font-size:18px; margin:0; }
+    .sub{ color:var(--muted); font-size:13px; margin:6px 0 0; line-height:1.5; }
+    .pill{ font-size:12px; color:var(--muted); border:1px solid var(--line); padding:6px 10px; border-radius:999px; }
+    .btn{ background:rgba(122,162,255,.14); color:var(--text); border:1px solid rgba(122,162,255,.35);
+      padding:10px 12px; border-radius:12px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+    .btn.secondary{ background:rgba(255,255,255,.08); border:1px solid var(--line); }
+    .btn[aria-disabled="true"]{ opacity:.45; pointer-events:none; }
+    .hr{ height:1px; background:var(--line); margin:12px 0; }
+    .text{
+      white-space:pre-wrap;
+      line-height:1.6;
+      font-size:14px;
+      color:var(--text);
+    }
+    .muted{ color:var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="row">
+        <div>
+          <h1>🕯 Méditation du jour</h1>
+          <div class="sub" id="dateLabel"></div>
+        </div>
+        <div class="row" style="justify-content:flex-end">
+          <a class="btn secondary" id="backToApp" href="index.html">⬅ Retour à l’appli</a>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px; justify-content:space-between">
+        <button class="btn secondary" id="prev">← Jour</button>
+        <span class="pill" id="litDay"></span>
+        <button class="btn secondary" id="next">Jour →</button>
+      </div>
+
+      <div class="hr"></div>
+      <div class="text" id="content"></div>
+      <div class="sub muted" id="missing" style="display:none; margin-top:10px">
+        Méditation non disponible pour cette date.
+      </div>
+    </div>
+  </div>
+
+  <script src="meditations-data.js"></script>
+  <script>
+    (() => {
+      const START = new Date(2026,1,18); START.setHours(0,0,0,0);
+      const END   = new Date(2026,3,5);  END.setHours(0,0,0,0);
+
+      const $ = (id) => document.getElementById(id);
+
+      function toISODate(d){
+        const x = new Date(d); x.setHours(0,0,0,0);
+        const yyyy = x.getFullYear();
+        const mm = String(x.getMonth()+1).padStart(2,'0');
+        const dd = String(x.getDate()).padStart(2,'0');
+        return `${yyyy}-${mm}-${dd}`;
+      }
+      function dateFromISO(iso){
+        const [y,m,d] = String(iso).split("-").map(Number);
+        const dt = new Date(y,(m||1)-1,d||1);
+        dt.setHours(0,0,0,0);
+        return dt;
+      }
+      function clamp(d){
+        const x = new Date(d); x.setHours(0,0,0,0);
+        if(x < START) return new Date(START);
+        if(x > END) return new Date(END);
+        return x;
+      }
+      function addDays(d,n){
+        const x = new Date(d); x.setDate(x.getDate()+n); x.setHours(0,0,0,0); return x;
+      }
+      function formatFR(d){
+        return new Intl.DateTimeFormat('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' }).format(d);
+      }
+
+      let current = clamp(new Date());
+      const params = new URLSearchParams(location.search);
+      const q = params.get("date");
+      if(q){
+        const dt = clamp(dateFromISO(q));
+        current = dt;
+      }
+
+      function render(){
+        current = clamp(current);
+        const iso = toISODate(current);
+
+        $("dateLabel").textContent = formatFR(current);
+        $("backToApp").href = `index.html?date=${encodeURIComponent(iso)}`;
+
+        const data = window.CHRISTUS_MEDITATIONS || {};
+        const entry = data[iso] || null;
+
+        $("missing").style.display = entry ? "none" : "block";
+
+        if(entry){
+          $("litDay").textContent = entry.litDay || "";
+          const parts = [];
+          if(entry.gospelRef) parts.push(entry.gospelRef);
+          if(entry.gospel) parts.push(entry.gospel);
+          if(entry.meditation){
+            parts.push("— — —");
+            parts.push("Méditation");
+            parts.push(entry.meditation);
+          } else {
+            parts.push("— — —");
+            parts.push("Méditation");
+            parts.push("Méditation à venir.");
+          }
+          $("content").textContent = parts.join("\n\n");
+        } else {
+          $("litDay").textContent = "";
+          $("content").textContent = "";
+        }
+
+        $("prev").setAttribute("aria-disabled", current <= START ? "true" : "false");
+        $("next").setAttribute("aria-disabled", current >= END ? "true" : "false");
+      }
+
+      $("prev").addEventListener("click", () => {
+        if(current <= START) return;
+        current = addDays(current,-1);
+        render();
+        history.replaceState(null,"",`?date=${toISODate(current)}`);
+      });
+      $("next").addEventListener("click", () => {
+        if(current >= END) return;
+        current = addDays(current,1);
+        render();
+        history.replaceState(null,"",`?date=${toISODate(current)}`);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
