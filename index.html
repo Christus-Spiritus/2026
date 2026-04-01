@@ -1,22 +1,9 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta property="og:image" content="icon-512.png">
-  <meta property="og:title" content="Parcours Christus 2026">
-  <meta property="og:description" content="40 jours pour remettre le Christ au centre">
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Christus 2026 – Objectifs</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon-512.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  
-  <meta name="theme-color" content="#0b1220">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Christus">
-
+  <title>Carême 2026 – Objectifs</title>
   <style>
     :root{
       --bg:#0b1220; --text:#e8eefc; --muted:#a7b4d6;
@@ -129,7 +116,7 @@
         <button class="btn secondary" id="nextDay">Jour →</button>
         <a class="btn" id="aelfLink" target="_blank" rel="noopener">📖 Évangile du jour (AELF)</a>
         <a class="btn secondary" href="guide.html">📘 Guide du parcours</a>
-         <a class="btn secondary" id="meditationLink" target="_blank" rel="noopener">🕯 Méditation du jour</a>
+        <a class="btn secondary" href="stats.html">📊 Statistiques</a>
       </div>
     </div>
 
@@ -188,16 +175,7 @@
       />
       <div class="foot">Tu peux enregistrer cette page sur l’écran d’accueil pour l’utiliser comme une appli.</div>
     </div>
- <div style="font-size:12px;color:var(--muted);margin-top:6px;">
-  <br> Pour suivre plutôt le parcours Christus Junior, c’est ici ! <br><br>
-</div>
-<a class="btn secondary"
-   href="https://christus-spiritus.github.io/Junior-2026/"
-   target="_blank"
-   rel="noopener"
-   title="Pour suivre plutôt le parcours Christus Junior, c'est ici !">
-  🌱 Christus Junior
-</a>
+
   </div>
 </div>
 
@@ -259,7 +237,7 @@
 
     2: {
       daily: [
-        { id:"oraison", label:"Oraison : 30 minutes (minimum 15 minutes)", cat:"Discipline spirituelle" },
+        { id:"oraison", label:"Oraison : 30 minutes", cat:"Discipline spirituelle" },
         { id:"lecture_20", label:"Lecture/formation : 20 minutes de lecture spirituelle", cat:"Discipline spirituelle" },
         { id:"examen", label:"Examen de conscience : chaque soir", cat:"Discipline spirituelle" },
 
@@ -278,8 +256,7 @@
       ],
       weekly: [
         { id:"chapelet_complet", label:"Chapelet : 1 chapelet complet/semaine (ou quotidien si possible)", cat:"Discipline spirituelle" },
-        { id:"sport_1", label:"Exercice physique : 2 séances/semaine (1/2)", cat:"Ascèse" },
-        { id:"sport_2", label:"Exercice physique : 2 séances/semaine (2/2)", cat:"Ascèse" },
+        { id:"sport_2", label:"Exercice physique : 2 séances/semaine", cat:"Ascèse" },
 
         { id:"aumone_3", label:"Aumône : au moins 3 gestes concrets/semaine", cat:"Charité & fraternité" },
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
@@ -292,7 +269,7 @@
 
     3: {
       daily: [
-        { id:"oraison_1h", label:"Oraison : 1h par jour (minimum 20 minutes)", cat:"Discipline spirituelle" },
+        { id:"oraison_1h", label:"Oraison : 1h par jour", cat:"Discipline spirituelle" },
         { id:"chapelet_quot", label:"Chapelet : quotidien, intégral si possible", cat:"Discipline spirituelle" },
         { id:"lecture_30", label:"Lecture spirituelle : 30 min (Écriture + auteur spirituel)", cat:"Discipline spirituelle" },
         { id:"examen_prof", label:"Examen approfondi : chaque soir (écrit si possible)", cat:"Discipline spirituelle" },
@@ -314,9 +291,7 @@
         { id:"adoration", label:"Adoration : au moins 1 fois/semaine (plus si possible)", cat:"Discipline spirituelle" },
         { id:"messe", label:"Messe : au moins 1 messe en semaine en plus du dimanche (quotidienne si possible)", cat:"Discipline spirituelle" },
 
-        { id:"sport_1", label:"Exercice physique : 3 séances/semaine (1/3)", cat:"Ascèse" },
-        { id:"sport_2", label:"Exercice physique : 3 séances/semaine (2/3)", cat:"Ascèse" },
-        { id:"sport_3", label:"Exercice physique : 3 séances/semaine (3/3)", cat:"Ascèse" },
+        { id:"sport_3", label:"Exercice physique : 3 séances/semaine", cat:"Ascèse" },
 
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
       ],
@@ -489,14 +464,6 @@
     const meta = LEVEL_META[parseInt(state.level,10)];
     $("levelTitle").textContent = meta.name;
     $("levelVerse").textContent = meta.verse;
-
-    // Méditation du jour (page locale)
-    const med = $("meditationLink");
-    if(med) med.href = `meditation.html?date=${iso}`;
-$("prevDay").setAttribute("aria-disabled", current <= START ? "true" : "false");
-    $("nextDay").setAttribute("aria-disabled", current >= END ? "true" : "false");
-
-  
   }
 
   function tasksTodayFor(level, date){
