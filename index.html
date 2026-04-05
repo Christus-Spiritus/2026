@@ -116,10 +116,12 @@
         <button class="btn secondary" id="nextDay">Jour →</button>
         <a class="btn" id="aelfLink" target="_blank" rel="noopener">📖 Évangile du jour (AELF)</a>
         <a class="btn secondary" href="guide.html">📘 Guide du parcours</a>
+        <a class="btn secondary" href="meditation.html">🕯 Méditation du jour</a>
         <a class="btn secondary" href="stats.html">📊 Statistiques</a>
       </div>
     </div>
 
+    <div id="spiritusCta" style="display:none; margin-top:10px;"></div>
     <div style="margin-top:12px">
       <div class="row" style="justify-content:space-between; margin-bottom:8px">
         <span class="pill">Aujourd’hui : <b id="dayPct">0%</b></span>
@@ -256,7 +258,8 @@
       ],
       weekly: [
         { id:"chapelet_complet", label:"Chapelet : 1 chapelet complet/semaine (ou quotidien si possible)", cat:"Discipline spirituelle" },
-        { id:"sport_2", label:"Exercice physique : 2 séances/semaine", cat:"Ascèse" },
+        { id:"sport_1", label:"Exercice physique : 2 séances/semaine (1/2)", cat:"Ascèse" },
+        { id:"sport_2", label:"Exercice physique : 2 séances/semaine (2/2)", cat:"Ascèse" },
 
         { id:"aumone_3", label:"Aumône : au moins 3 gestes concrets/semaine", cat:"Charité & fraternité" },
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
@@ -291,7 +294,9 @@
         { id:"adoration", label:"Adoration : au moins 1 fois/semaine (plus si possible)", cat:"Discipline spirituelle" },
         { id:"messe", label:"Messe : au moins 1 messe en semaine en plus du dimanche (quotidienne si possible)", cat:"Discipline spirituelle" },
 
-        { id:"sport_3", label:"Exercice physique : 3 séances/semaine", cat:"Ascèse" },
+        { id:"sport_1", label:"Exercice physique : 3 séances/semaine (1/3)", cat:"Ascèse" },
+        { id:"sport_2", label:"Exercice physique : 3 séances/semaine (2/3)", cat:"Ascèse" },
+        { id:"sport_3", label:"Exercice physique : 3 séances/semaine (3/3)", cat:"Ascèse" },
 
         { id:"fraternite_groupe", label:"Fraternité : réunion hebdomadaire en petite équipe", cat:"Charité & fraternité" },
       ],
@@ -449,7 +454,18 @@
     $("rangeLabel").textContent = `Du ${formatShortFR(START)} au ${formatShortFR(END)} (Carême 2026)`;
     $("aelfLink").href = aelfUrl(iso);
 
-    const label = specialDayLabel(current);
+    
+    const spiritusCta = $("spiritusCta");
+    if(spiritusCta){
+      if(iso === "2026-04-05"){
+        spiritusCta.style.display = "";
+        spiritusCta.innerHTML = '<a class="btn" href="https://christus-spiritus.github.io/Spiritus-2026/" target="_blank" rel="noopener">🔥 Continuer avec Spiritus</a>';
+      }else{
+        spiritusCta.style.display = "none";
+        spiritusCta.innerHTML = "";
+      }
+    }
+const label = specialDayLabel(current);
     if(label){
       const extra = isAsceseLifted(current) ? " · Ascèses levées (sauf sommeil)" : "";
       $("specialLabel").style.display = "";
